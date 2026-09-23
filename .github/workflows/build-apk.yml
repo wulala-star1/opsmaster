@@ -27,6 +27,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Install Android SDK Platform 36
+        run: |
+          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
       - name: Install Node Dependencies
         run: npm install
@@ -34,12 +37,8 @@ jobs:
       - name: Build Web Production Assets
         run: npm run build
 
-      - name: Add Android Native Project if not exists
-        run: |
-          if [ ! -d "android" ]; then
-            npx cap add android
-          fi
-          npx cap sync android
+      - name: Sync Capacitor Android
+        run: npx cap sync android
 
       - name: Grant Execute Permission for Gradlew
         run: chmod +x android/gradlew
