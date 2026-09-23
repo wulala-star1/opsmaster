@@ -3,6 +3,7 @@ node_modules/
 
 # Build output
 dist/
+*.apk
 
 # Android build artifacts
 android/.gradle/
